@@ -19,31 +19,39 @@ print(f"Nombre de colonnes : {df.shape[1]}")
 print(f"Colonnes : {list(df.columns)}")
 
 # Apercu des 5 premieres lignes
-print("\n- - - 5 premiers patients ---")
+print("\n--- 5 premiers patients ---")
 print(df.head())
 
 # ===== STATISTIQUES DE BASE =====
-print("\n- - - Statistiques descriptives ---")
+print("\n--- Statistiques descriptives ---")
 print(df.describe().round(2))
 
 # ===== REPARTITION DES DIAGNOSTICS =====
-print("\n- - - Repartition des diagnostics ---")
+print("\n--- Repartition des diagnostics ---")
 diag_counts = df["diagnostic"].value_counts()
 for diag, count in diag_counts.items():
     pct = count / len(df) * 100
     print(f" {diag:12s} : {count:3d} patients({pct:.1f}%)")
 
 # ===== REPARTITION PAR REGION =====
-print("\n- - - Repartition par region ( top 5) ---")
+print("\n--- Repartition par region (top 5) ---")
 region_counts = df["region"].value_counts().head(5)
 for region, count in region_counts.items():
     print(f"{region:15s}: {count:3d} patients")
 
 # ===== TEMPERATURE MOYENNE PAR DIAGNOSTIC =====
-print("\n- - - Temperature moyenne par diagnostic ---")
+print("\n--- Temperature moyenne par diagnostic ---")
 temp_by_diag = df.groupby("diagnostic")["temperature"].mean()
 for diag, temp in temp_by_diag.items():  # type: ignore
     print(f"{diag:12s} : {temp:.1f} C")
+
+# ===== NOMBRE DE PATIENTS PAR SEXE ET PAR DIAGNOSTICS ===== Exercice 1
+print("\n--- Nombre de patients par sexe et par diagnostics ---")
+patients_by_sex_and_diag = df.groupby(["sexe", "diagnostic"]).size()
+for df_tuple, number in patients_by_sex_and_diag.items():
+    sexe, diagnostic = df_tuple  # type: ignore
+    print(f"{sexe:<3} | {diagnostic:<10} | {number:>4}")
+
 print(f"\n{'=' * 50}")
 print("Exploration terminee !")
 print("Prochain lab : entrainer un modele ML")
