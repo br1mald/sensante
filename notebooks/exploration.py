@@ -45,12 +45,12 @@ temp_by_diag = df.groupby("diagnostic")["temperature"].mean()
 for diag, temp in temp_by_diag.items():  # type: ignore
     print(f"{diag:12s} : {temp:.1f} C")
 
-# ===== NOMBRE DE PATIENTS PAR SEXE ET PAR DIAGNOSTICS ===== Exercice 1
-print("\n--- Nombre de patients par sexe et par diagnostics ---")
-patients_by_sex_and_diag = df.groupby(["sexe", "diagnostic"]).size()
-for df_tuple, number in patients_by_sex_and_diag.items():
-    sexe, diagnostic = df_tuple  # type: ignore
-    print(f"{sexe:<3} | {diagnostic:<10} | {number:>4}")
+# # ===== NOMBRE DE PATIENTS PAR SEXE ET PAR DIAGNOSTICS ===== Exercice 1
+# print("\n--- Nombre de patients par sexe et par diagnostics ---")
+# patients_by_sex_and_diag = df.groupby(["sexe", "diagnostic"]).size()
+# for df_tuple, number in patients_by_sex_and_diag.items():
+#     sexe, diagnostic = df_tuple  # type: ignore
+#     print(f"{sexe:<3} | {diagnostic:<10} | {number:>4}")
 
 print(f"\n{'=' * 50}")
 print("Exploration terminee !")
